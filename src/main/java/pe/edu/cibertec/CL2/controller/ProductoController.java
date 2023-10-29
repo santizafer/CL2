@@ -66,6 +66,9 @@ public class ProductoController {
 
 
     /*
+
+    FUNCIONA ->
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Producto> eliminarProducto(
             @PathVariable("id") Integer id){
@@ -73,7 +76,6 @@ public class ProductoController {
                 .eliminarProductoPorId(id).get();
         return new ResponseEntity<>(producto, HttpStatus.OK);
     }
-
      */
 
 
@@ -85,6 +87,32 @@ public class ProductoController {
         return new ResponseEntity<>(producto, HttpStatus.OK);
     }
 
+
+    @GetMapping("/productoname/{filtro}")
+    public ResponseEntity<List<Producto>> filtrarProductosPorNombre(
+            @PathVariable("filtro") String filtro
+    ){
+        List<Producto> productoList = new ArrayList<>();
+        productoService.obtenerProductosPorFiltro(filtro)
+                .forEach(productoList::add);
+        if(productoList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(productoList, HttpStatus.OK);
+    }
+
+    @GetMapping("/productoanio/{filtro}")
+    public ResponseEntity<List<Producto>> filtrarProductosPorAnio(
+            @PathVariable("filtro") String filtro
+    ){
+        List<Producto> productoList = new ArrayList<>();
+        productoService.obtenerProductosPorFiltroAnio(filtro)
+                .forEach(productoList::add);
+        if(productoList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(productoList, HttpStatus.OK);
+    }
 
 
 

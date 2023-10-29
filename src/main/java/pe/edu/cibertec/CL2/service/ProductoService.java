@@ -28,15 +28,16 @@ public class ProductoService {
             return producto;
     }
 
-    /*public Optional<Producto> eliminarProductoPorId(Integer id){
-        Optional<Producto> producto = productoRepository.deleteById(id);
+    /*
+    public Optional<Producto> eliminarProductoPorId(Integer id){
+        Optional<Producto> producto = productoRepository.delete(id);
         if(producto.isEmpty()){
             return Optional.empty();
         }else
             return producto;
-    }
+    }*/
 
-     */
+
 
     public Optional<Producto> obtenerProductoPorNombre(String categoryName){
         Optional<Producto> producto = productoRepository.findByProductoname(categoryName);
@@ -44,6 +45,14 @@ public class ProductoService {
             return  Optional.empty();
         else
             return producto;
+    }
+
+    public List<Producto> obtenerProductosPorFiltro(String filtro){
+        return productoRepository.filtrarProductosPorNombreSQL(filtro);
+    }
+
+    public List<Producto> obtenerProductosPorFiltroAnio(String filtro){
+        return productoRepository.filtrarProductosAnio2024SQL(filtro);
     }
 
 
